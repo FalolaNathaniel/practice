@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Log-In Page</title>
+
+      <style>
+         * {
+            margin: 0;
+            position: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+         }
+
+         body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: rgb(56, 55, 55);
+            background-image: url('./image/lady.jpg');
+            background-size: cover;
+            background-position: center;
+
+         }
+
+         .login-container {
+            position: relative;
+            width: 320px;
+            background: rgb(77, 76, 76);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(16, 16, 16, 0.646);
+            overflow: hidden;
+         }
+
+         .login-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 380px;
+            height: 420px;
+            background: linear-gradient(0deg, transparent, rgb(8, 136, 162), #45f3ff);
+            transform-origin: bottom right;
+            animation: animate 6s linear infinite;
+         }
+
+         .login-container::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 380px;
+            height: 420px;
+            background: linear-gradient(0deg, transparent, #45f3ff, #45f3ff);
+            transform-origin: bottom right;
+            animation: animate 6s linear infinite;
+            animation-delay: -3s;
+         }
+
+         @keyframes animate {
+            0% {
+               transform: rotate(0deg);
+            }
+
+            100% {
+               transform: rotate(360deg);
+            }
+         }
+
+         .form-box {
+            position: relative;
+            z-index: 10;
+            background: #28292d;
+            padding: 40px;
+            border-radius: 4px;
+
+         }
+
+         h2 {
+            color: rgb(29, 165, 192);
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2em;
+         }
+
+         .input-box {
+            position: relative;
+            margin-bottom: 30px;
+         }
+
+         .input-box input {
+            width: 100%;
+            padding: 10px;
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid rgb(29, 165, 192);
+            color: #fff;
+            font-size: 1em;
+            outline: none;
+            transition: 0.5s;
+         }
+           
+
+         .input-box label {
+            position: absolute;
+            left: 0;
+            padding: 10px 0;
+            pointer-events: none;
+            color: rgba(255, 255, 255, 0.5);
+            transition: 0.5s;
+         }
+
+         .input-box input:valid ~ label,
+         .input-box input:focus ~ label {
+            transform: translaterY(-20px);
+            font-size: 0.8em;
+            color: #45f3ff;
+         }
+
+         button {
+            width: 100%;
+            padding: 10px 20px;
+            background: rgb(29, 165, 192);
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            color: #1f1f1f;
+            font-weight: 600;
+            transition: 0.5s;
+
+
+         }
+
+         button:hover {
+            background: rgb(1, 255, 255);
+            letter-spacing: 0.1em;
+         }
+
+         audio {
+            width: 100%;
+            padding: 10px 20px;
+            background: rgb(54, 63, 65);
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            color: rgb(11, 125, 125);
+            font-weight: 600;
+            transition: 0.5s;
+            border: none;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(rgb(75, 74, 74), rgb(98, 156, 171));
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(16, 16, 16, 0.646);
+      
+         }
+      </style>
+
+      <title> Log-in Page </title>
+   </head>
+
+   <Body>
+      <div>
+         <div class="login-container">
+            <div class="form-box">
+               <h2>Login</h2>
+               <div class="input-box">
+                  <input type="text" required>
+                  <label>Username</label>
+               </div>
+               <div class="input-box">
+                  <input type="password" required>
+                  <label>Password</label>
+               </div>
+               <button type="submit">Login</button>
+            </div>
+
+            <audio controls="audio controls" draggable="true">
+               <source src="./Audio/Asake.mp3">
+            </audio>
+   </Body>
+
+</html>
