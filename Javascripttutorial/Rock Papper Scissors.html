@@ -7,7 +7,7 @@
     <title>Rock Paper Scissors</title>
 
     <style>
-       body {
+body {
     background-color: rgb(137, 137, 112);
     background-image: url(../image/Mountain\ 1.jpg);
     background-size: cover;
@@ -20,6 +20,8 @@
     align-items: center;
     height: 100vh;
     margin: 0;
+    /* Setting perspective for the whole scene */
+    perspective: 1000px;
 }
 
 .container {
@@ -31,6 +33,9 @@
     text-align: center;
     background-color: rgb(255, 255, 255);
     border-radius: 10px;
+    /* 3D for container */
+    transform-style: preserve-3d;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 }
 
 .title {
@@ -41,14 +46,16 @@
 
 .move-icon {
     height: 80px;
-    /* Add 3D effects */
+    /* More interactive 3D effects */
     transform: perspective(500px) rotateX(10deg) rotateY(-10deg);
     box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .move-icon:hover {
-    transform: perspective(500px) rotateX(0deg) rotateY(0deg) scale(1.05);
+    /* More dynamic hover effect */
+    transform: perspective(500px) rotateX(0deg) rotateY(0deg) scale(1.1) translateZ(20px);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 }
 
 .move-button {
@@ -59,7 +66,46 @@
     border-radius: 60px;
     margin: 10px;
     cursor: pointer;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+    /* Enhanced 3D for button */
+    transform-style: preserve-3d;
+    transform: perspective(500px) rotateX(5deg) rotateY(-5deg);
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+
+    /* Mouse Pointer 3D effect */
+    transform-origin: center;
+    transition: all 0.3s ease;
+}
+
+/* Hover effect for buttons */
+.move-button:hover {
+    transform: perspective(500px) rotateX(0deg) rotateY(0deg) scale(1.1) translateZ(20px);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+/* Mouse move effect for buttons */
+.move-button {
+    position: relative;
+}
+
+.move-button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 70%);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease, width 0.3s ease, height 0.3s ease;
+}
+
+.move-button:hover::before {
+    width: 140px;
+    height: 140px;
+    opacity: 1;
 }
 
 .result {
@@ -98,7 +144,7 @@
             Computer
         </p>
 
-        <p class="js-score score">Wins: 0, Losses: 0, Ties: 0</p>
+         <p class="js-score score">Wins: 0, Losses: 0, Ties: 0</p>
 
         <button onclick="
         score.wins = 0;
