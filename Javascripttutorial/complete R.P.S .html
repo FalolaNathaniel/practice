@@ -7,7 +7,7 @@
         <title>Rock Paper Scissors</title>
 
         <style>
-          body {
+ body {
     background-color: rgb(169, 169, 139);
     background-image: url('../image/Mountain\ 1.jpg');
     background-size: cover;
@@ -21,7 +21,7 @@
     height: 100vh;
     margin: 0;
     animation: backgroundMove 20s infinite alternate;
-    perspective: 1200px; /* Increased perspective for more pronounced 3D effect */
+    perspective: 1200px;
 }
 
 @keyframes backgroundMove {
@@ -35,13 +35,13 @@
 }
 
 .container {
-    border: 2px solid black;
+    border: 2px solid rgb(20, 20, 20);
     padding: 20px;
     margin: 20px;
     width: 80%;
     max-width: 600px;
     text-align: center;
-    background-color: rgb(255, 255, 255);
+    background: linear-gradient(45deg, #f093fb 0%, #f5576c 100%);
     border-radius: 10px;
     transform-style: preserve-3d;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
@@ -51,6 +51,9 @@
     font-size: 30px;
     font-weight: bold;
     margin-bottom: 20px;
+    background: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .move-icon {
@@ -63,6 +66,18 @@
 .move-icon:hover {
     transform: perspective(500px) rotateX(0deg) rotateY(0deg) scale(1.1) translateZ(30px);
     box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
+}
+
+#rockIcon {
+    filter: hue-rotate(120deg);
+}
+
+#paperIcon {
+    filter: hue-rotate(240deg);
+}
+
+#scissorsIcon {
+    filter: hue-rotate(300deg);
 }
 
 .move-button {
@@ -88,7 +103,6 @@
     transform: perspective(500px) rotateX(0deg) rotateY(0deg) scale(0.95) translateZ(5px);
 }
 
-/* Mouse Pointer 3D effect */
 .move-button::before {
     content: '';
     position: absolute;
@@ -98,7 +112,7 @@
     width: 120px;
     height: 120px;
     border-radius: 50%;
-    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 70%);
+    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.5) 0%, rgba(255, 166, 0, 0) 70%);
     opacity: 0;
     transition: opacity 0.3s ease, width 0.3s ease, height 0.3s ease;
     z-index: -1;
@@ -111,12 +125,13 @@
 }
 
 .result, .score {
-    /* Adding some depth to text */
     text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(to right, #ff7f50, #ff4500);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 #playerMove, #computerMove {
-    /* More dynamic reveal */
     transform: perspective(500px) rotateX(45deg) scale(0.5);
     transition: all 0.5s ease;
 }
@@ -200,7 +215,7 @@ function playGame(playerMove) {
     playerIcon.src = `../image/${playerMove}-removebg-preview.png`;
     computerIcon.src = `../image/${computerMove}-removebg-preview.png`;
 
-    // 3D Effect on showing moves
+   
     gsap.fromTo([playerIcon, computerIcon], { scale: 0.5, opacity: 0, rotationY: 0 }, { scale: 1, opacity: 1, rotationY: 360, duration: 0.5 });
     
     setTimeout(() => {
