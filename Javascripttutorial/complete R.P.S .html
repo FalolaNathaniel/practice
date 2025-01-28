@@ -1,227 +1,255 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rock Paper Scissors</title>
 
-    <style>
-        body {
-            background-color: rgb(169, 169, 139);
-            background-image: url('../image/Mountain\ 1.jpg');
-            background-size: cover;
-            background-position: center;
-            background-blend-mode: multiply;
-            color: black;
-            font-family: Arial, Helvetica, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            animation: backgroundMove 20s infinite alternate;
-        }
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Rock Paper Scissors</title>
 
-        @keyframes backgroundMove {
-            0% { background-position: 0% 0%; }
-            100% { background-position: 100% 100%; }
-        }
+        <style>
+            body {
+                background-color: rgb(169, 169, 139);
+                background-image: url('../image/Mountain\ 1.jpg');
+                background-size: cover;
+                background-position: center;
+                background-blend-mode: multiply;
+                color: black;
+                font-family: Arial, Helvetica, sans-serif;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                margin: 0;
+                animation: backgroundMove 20s infinite alternate;
+                /* Adding perspective to the entire scene */
+                perspective: 800px;
+            }
 
-        .container {
-            border: 2px solid black;
-            padding: 20px;
-            margin: 20px;
-            width: 80%;
-            max-width: 600px;
-            text-align: center;
-            background-color: rgb(255, 255, 255);
-            border-radius: 10px;
-        }
-
-        .title {
-            font-size: 30px;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-
-        .move-icon {
-            height: 80px;
-        }
-
-        .move-button {
-            background-color: transparent;
-            border: 2px solid rgb(7, 6, 6);
-            width: 120px;
-            height: 120px;
-            border-radius: 60px;
-            margin: 10px;
-            cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .move-button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-        }
-
-        .move-button:active {
-            transform: scale(0.9);
-        }
-
-        .result {
-            font-size: 25px;
-            font-weight: bold;
-            margin-top: 30px;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.5s ease;
-        }
-
-        .result.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .score {
-            margin-top: 20px;
-        }
-
-        #playerMove, #computerMove {
-            opacity: 0;
-            transform: scale(0.5);
-            transition: all 0.3s ease;
-        }
-
-        #playerMove.show, #computerMove.show {
-            opacity: 1;
-            transform: scale(1);
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <p class="title" id="gameTitle">Rock Paper Scissors</p>
-        <div id="buttons">
-            <button onclick="playGame('rock');" class="move-button" id="rockButton">
-                <img src="../image/Rock-removebg-preview.png" class="move-icon">
-            </button>
-            <button onclick="playGame('paper');" class="move-button" id="paperButton">
-                <img src="../image/Papper-removebg-preview (1).png" class="move-icon">
-            </button>
-            <button onclick="playGame('scissors');" class="move-button" id="scissorsButton">
-                <img src="../image/Scissors-removebg-preview.png" class="move-icon">
-            </button>
-        </div>
-        <p class="js-result result" id="resultText">You Win!</p>
-        <p class="js-moves" id="movesText">
-            You
-            <img src="../image/Rock-removebg-preview.png" class="move-icon" id="playerMove">
-            <img src="../image/Scissors-removebg-preview.png" class="move-icon" id="computerMove">
-            Computer
-        </p>
-        <p class="js-score score" id="scoreText">Wins: 0, Losses: 0, Ties: 0</p>
-        <button onclick="resetScore();">Reset Score</button>
-    </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"></script>
-    <script>
-        let score = JSON.parse(localStorage.getItem('score')) || {
-            wins: 0,
-            losses: 0,
-            ties: 0,
-        };
-
-        function updateScoreElement() {
-            document.querySelector('.js-score').innerText = `Wins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`;
-        }
-
-        function animateButton(button) {
-            gsap.fromTo(button, { scale: 1 }, { scale: 1.2, duration: 1.5, yoyo: true, repeat: 1 });
-        }
-
-        function playGame(playerMove) {
-            animateButton(document.getElementById(playerMove + 'Button'));
-            const computerMove = pickComputerMove();
-            let result = '';
-
-            if (playerMove === 'rock') {
-                if (computerMove === 'scissors') {
-                    result = 'You win!';
-                    score.wins++;
-                } else if (computerMove === 'paper') {
-                    result = 'You lose!';
-                    score.losses++;
-                } else {
-                    result = 'Tie!';
-                    score.ties++;
+            @keyframes backgroundMove {
+                0% {
+                    background-position: 0% 0%;
                 }
-            } else if (playerMove === 'paper') {
-                if (computerMove === 'rock') {
-                    result = 'You win!';
-                    score.wins++;
-                } else if (computerMove === 'scissors') {
-                    result = 'You lose!';
-                    score.losses++;
-                } else {
-                    result = 'Tie!';
-                    score.ties++;
-                }
-            } else {
-                if (computerMove === 'paper') {
-                    result = 'You win!';
-                    score.wins++;
-                } else if (computerMove === 'rock') {
-                    result = 'You lose!';
-                    score.losses++;
-                } else {
-                    result = 'Tie!';
-                    score.ties++;
+
+                100% {
+                    background-position: 100% 100%;
                 }
             }
 
-            localStorage.setItem('score', JSON.stringify(score));
+            .container {
+                border: 2px solid black;
+                padding: 20px;
+                margin: 20px;
+                width: 80%;
+                max-width: 600px;
+                text-align: center;
+                background-color: rgb(255, 255, 255);
+                border-radius: 10px;
+                /* 3D effect for container */
+                transform-style: preserve-3d;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+            }
 
-            document.getElementById('resultText').textContent = result;
-            document.getElementById('resultText').classList.add('show'); // Show result with animation
+            .title {
+                font-size: 30px;
+                font-weight: bold;
+                margin-bottom: 20px;
+            }
 
-            const playerIcon = document.getElementById('playerMove');
-            const computerIcon = document.getElementById('computerMove');
-            playerIcon.src = `../image/${playerMove}-removebg-preview.png`;
-            computerIcon.src = `../image/${computerMove}-removebg-preview.png`;
+            .move-icon {
+                height: 80px;
+                /* Add 3D effects to icons */
+                transform: perspective(500px) rotateX(10deg) rotateY(-10deg);
+                box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+
+            .move-icon:hover {
+                transform: perspective(500px) rotateX(0deg) rotateY(0deg) scale(1.05);
+                box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            }
+
+            .move-button {
+                background-color: transparent;
+                border: 2px solid rgb(7, 6, 6);
+                width: 120px;
+                height: 120px;
+                border-radius: 60px;
+                margin: 10px;
+                cursor: pointer;
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+                /* 3D button effects */
+                transform-style: preserve-3d;
+                transform: perspective(500px) rotateX(5deg) rotateY(-5deg);
+                box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+            }
+
+            .move-button:hover {
+                transform: perspective(500px) rotateX(0deg) rotateY(0deg) scale(1.1);
+                box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            }
+
+            .move-button:active {
+                transform: perspective(500px) rotateX(0deg) rotateY(0deg) scale(0.9);
+            }
+
+            .result {
+                font-size: 25px;
+                font-weight: bold;
+                margin-top: 30px;
+                opacity: 0;
+                transform: translateY(20px);
+                transition: all 0.5s ease;
+            }
+
+            .result.show {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            .score {
+                margin-top: 20px;
+            }
+
+            #playerMove,
+            #computerMove {
+                opacity: 0;
+                transform: scale(0.5);
+                transition: all 0.3s ease;
+            }
+
+            #playerMove.show,
+            #computerMove.show {
+                opacity: 1;
+                transform: scale(1);
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="container">
+            <p class="title" id="gameTitle">Rock Paper Scissors</p>
+            <div id="buttons">
+                <button onclick="playGame('rock');" class="move-button" id="rockButton">
+                    <img src="../image/Rock-removebg-preview.png" class="move-icon">
+                </button>
+                <button onclick="playGame('paper');" class="move-button" id="paperButton">
+                    <img src="../image/Papper-removebg-preview (1).png" class="move-icon">
+                </button>
+                <button onclick="playGame('scissors');" class="move-button" id="scissorsButton">
+                    <img src="../image/Scissors-removebg-preview.png" class="move-icon">
+                </button>
+            </div>
+            <p class="js-result result" id="resultText">You Win!</p>
+            <p class="js-moves" id="movesText">
+                You
+                <img src="../image/Rock-removebg-preview.png" class="move-icon" id="playerMove">
+                <img src="../image/Scissors-removebg-preview.png" class="move-icon" id="computerMove">
+                Computer
+            </p>
+            <p class="js-score score" id="scoreText">Wins: 0, Losses: 0, Ties: 0</p>
+            <button onclick="resetScore();">Reset Score</button>
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"></script>
+        <script>
+            let score = JSON.parse(localStorage.getItem('score')) || {
+                wins: 0,
+                losses: 0,
+                ties: 0,
+            };
+
+            function updateScoreElement() {
+                document.querySelector('.js-score').innerText = `Wins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`;
+            }
+
+            function animateButton(button) {
+                gsap.fromTo(button, { scale: 1 }, { scale: 1.2, duration: 1.5, yoyo: true, repeat: 1 });
+            }
+
+            function playGame(playerMove) {
+                animateButton(document.getElementById(playerMove + 'Button'));
+                const computerMove = pickComputerMove();
+                let result = '';
+
+                if (playerMove === 'rock') {
+                    if (computerMove === 'scissors') {
+                        result = 'You win!';
+                        score.wins++;
+                    } else if (computerMove === 'paper') {
+                        result = 'You lose!';
+                        score.losses++;
+                    } else {
+                        result = 'Tie!';
+                        score.ties++;
+                    }
+                } else if (playerMove === 'paper') {
+                    if (computerMove === 'rock') {
+                        result = 'You win!';
+                        score.wins++;
+                    } else if (computerMove === 'scissors') {
+                        result = 'You lose!';
+                        score.losses++;
+                    } else {
+                        result = 'Tie!';
+                        score.ties++;
+                    }
+                } else {
+                    if (computerMove === 'paper') {
+                        result = 'You win!';
+                        score.wins++;
+                    } else if (computerMove === 'rock') {
+                        result = 'You lose!';
+                        score.losses++;
+                    } else {
+                        result = 'Tie!';
+                        score.ties++;
+                    }
+                }
+
+                localStorage.setItem('score', JSON.stringify(score));
+
+                document.getElementById('resultText').textContent = result;
+                document.getElementById('resultText').classList.add('show');
+
+                const playerIcon = document.getElementById('playerMove');
+                const computerIcon = document.getElementById('computerMove');
+                playerIcon.src = `../image/${playerMove}-removebg-preview.png`;
+                computerIcon.src = `../image/${computerMove}-removebg-preview.png`;
+
+                playerIcon.classList.add('show');
+                computerIcon.classList.add('show');
+
+                setTimeout(() => {
+                    playerIcon.classList.remove('show');
+                    computerIcon.classList.remove('show');
+                    document.getElementById('resultText').classList.remove('show');
+                }, 3000);
+
+                updateScoreElement();
+            }
+
+            function pickComputerMove() {
+                const options = ['rock', 'paper', 'scissors'];
+                const randomIndex = Math.floor(Math.random() * options.length);
+                return options[randomIndex];
+            }
+
+            function resetScore() {
+                score.wins = 0;
+                score.losses = 0;
+                score.ties = 0;
+                localStorage.removeItem('score');
+                updateScoreElement();
+                gsap.fromTo('#scoreText', { opacity: 0 }, { opacity: 1, duration: 0.5 });
+            }
+
             
-            playerIcon.classList.add('show');
-            computerIcon.classList.add('show');
+            document.addEventListener('DOMContentLoaded', (event) => {
+                gsap.fromTo('.title', { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 1 });
+                gsap.fromTo('#buttons', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 1, delay: 0.2 });
+                updateScoreElement();
+            });
+        </script>
+    </body>
 
-            setTimeout(() => {
-                playerIcon.classList.remove('show');
-                computerIcon.classList.remove('show');
-                document.getElementById('resultText').classList.remove('show');
-            }, 3000);
-
-            updateScoreElement();
-        }
-
-        function pickComputerMove() {
-            const options = ['rock', 'paper', 'scissors'];
-            const randomIndex = Math.floor(Math.random() * options.length);
-            return options[randomIndex];
-        }
-
-        function resetScore() {
-            score.wins = 0;
-            score.losses = 0;
-            score.ties = 0;
-            localStorage.removeItem('score');
-            updateScoreElement();
-            gsap.fromTo('#scoreText', { opacity: 0 }, { opacity: 1, duration: 0.5 });
-        }
-
-        // Initialize animations on page load
-        document.addEventListener('DOMContentLoaded', (event) => {
-            gsap.fromTo('.title', { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 1 });
-            gsap.fromTo('#buttons', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 1, delay: 0.2 });
-            updateScoreElement();
-        });
-    </script>
-</body>
 </html>

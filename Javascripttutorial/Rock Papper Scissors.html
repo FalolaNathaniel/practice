@@ -7,61 +7,71 @@
     <title>Rock Paper Scissors</title>
 
     <style>
-        body {
-            background-color: rgb(137, 137, 112);
-            background-image: url(../image/Mountain\ 1.jpg);
-            background-size: cover;
-            background-position: center;
-            background-blend-mode: multiply;
-            color: black;
-            font-family: Arial, Helvetica, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
+       body {
+    background-color: rgb(137, 137, 112);
+    background-image: url(../image/Mountain\ 1.jpg);
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: multiply;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
 
-        .container {
-            border: 2px solid black;
-            padding: 20px;
-            margin: 20px;
-            width: 80%;
-            max-width: 600px;
-            text-align: center;
-            background-color: rgb(255, 255, 255);
-            border-radius: 10px;
-        }
+.container {
+    border: 2px solid black;
+    padding: 20px;
+    margin: 20px;
+    width: 80%;
+    max-width: 600px;
+    text-align: center;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+}
 
-        .title {
-            font-size: 30px;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
+.title {
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
 
-        .move-icon {
-            height: 80px;
-        }
+.move-icon {
+    height: 80px;
+    /* Add 3D effects */
+    transform: perspective(500px) rotateX(10deg) rotateY(-10deg);
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
 
-        .move-button {
-            background-color: transparent;
-            border: 2px solid rgb(7, 6, 6);
-            width: 120px;
-            height: 120px;
-            border-radius: 60px;
-            margin: 10px;
-            cursor: pointer;
-        }
+.move-icon:hover {
+    transform: perspective(500px) rotateX(0deg) rotateY(0deg) scale(1.05);
+}
 
-        .result {
-            font-size: 25px;
-            font-weight: bold;
-            margin-top: 30px;
-        }
+.move-button {
+    background-color: transparent;
+    border: 2px solid rgb(7, 6, 6);
+    width: 120px;
+    height: 120px;
+    border-radius: 60px;
+    margin: 10px;
+    cursor: pointer;
+    /* Add some depth */
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+}
 
-        .score {
-            margin-top: 20px;
-        }
+.result {
+    font-size: 25px;
+    font-weight: bold;
+    margin-top: 30px;
+}
+
+.score {
+    margin-top: 20px;
+}
     </style>
 </head>
 
@@ -109,7 +119,7 @@
                 document.querySelector('.js-score').innerText = `Wins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`;
             }
 
-            // Initialize score display
+            
             updateScoreElement();
         </script>
     </div>
