@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Frictionless Braking System Demo</title>
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                background: #f0f0f0;
+                overflow-x: hidden;
+            }
+
+            .brake-system {
+                position: relative;
+                width: 300px;
+                height: 200px;
+                border: 2px solid #333;
+                background: #ddd;
+                overflow: hidden;
+                transition: transform 0.3s ease-out;
+            }
+
+            .wheel {
+                position: absolute;
+                left: 50px;
+                top: 50px;
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+                background: #555;
+                animation: rotate 2s linear infinite;
+            }
+
+            .magnet {
+                position: absolute;
+                width: 50px;
+                height: 50px;
+                background: #78569a;
+                border-radius: 10px;
+                left: 200px;
+                top: 75px;
+            }
+
+            .energy-flow {
+                position: absolute;
+                width: 10px;
+                height: 100%;
+                background: linear-gradient(to bottom, transparent, #00ff00, transparent);
+                left: 250px;
+                top: 0;
+                opacity: 0;
+                animation: energyFlow 2s ease-in-out infinite;
+            }
+
+            .pointer-effect {
+                position: absolute;
+                width: 20px;
+                height: 20px;
+                background: rgba(0, 0, 255, 0.5);
+                border-radius: 50%;
+                pointer-events: none;
+                transform: translate(-50%, -50%);
+                transition: transform 0.1s ease-out, opacity 0.1s ease-out;
+                opacity: 0;
+            }
+
+            .image-container {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                pointer-events: none;
+                /* Allows interaction with elements behind images */
+            }
+
+            .image-container img {
+                max-width: 100px;
+                max-height: 100px;
+                opacity: 0.7;
+                /* Semi-transparent to not fully block interaction */
+            }
+
+
+            @keyframes rotate {
+                from {
+                    transform: rotate(0deg);
+                }
+
+                to {
+                    transform: rotate(360deg);
+                }
+            }
+
+            @keyframes energyFlow {
+                0% {
+                    opacity: 0;
+                }
+
+                50% {
+                    opacity: 1;
+                }
+
+                100% {
+                    opacity: 0;
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <div class="brake-system">
+            <div class="wheel"></div>
+            <div class="magnet"></div>
+            <div class="energy-flow"></div>
+            <div class="pointer-effect"></div>
+            <div class="image-container">
+                <img src="../image/Cat.jpg" alt="Wheel Image">
+                <img src="../image/Flower.jpg" alt="Magnet Image">
+                <img src="../image/Granpa.jpg" alt="Energy Flow Image">
+            </div>
+        </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () 
+                const brakeSystem = document.querySelector('.brake-system');
+                const wheel = document.querySelector('.wheel');
+                const pointerEffect = document.querySelector('.pointer-effect');
+
+                // Pointer Effect
+                document.addEventListener('mousemove', (e) => {
+                    http://pointerEffect.style.left = e.clientX + 'px';
+                    http://pointerEffect.style.top = e.clientY + 'px';
+                    http://pointerEffect.style.opacity = '1';
+    }))
+
+                document.addEventListener('mouseleave', () => {
+                    http://pointerEffect.style.opacity = '0';
+        });
+
+                // Interaction with the wheel
+                brakeSystem.addEventListener('mouseenter', function () {
+                    http://wheel.style.animationDuration = '4s'; // Slow down
+        });
+
+                brakeSystem.addEventListener('mouseleave', function () {
+                    http://wheel.style.animationDuration = '2s'; // Return to normal speed
+        });
+
+                // Scroll effect on the brake system
+                let scrollPos = 0;
+                window.addEventListener('scroll', function () {
+                    scrollPos = window.scrollY;
+                    // Move the brake system up or down based on scroll
+                    http://brakeSystem.style.transform = `translateY(${scrollPos * 0.5}px)`; // Adjust the multiplier for desired effect
+
+                    // Change wheel rotation speed based on scroll position
+                    const speed = 2 + (scrollPos / 100); // Increase speed as you scroll down
+                    http://wheel.style.animationDuration = `${speed}s`;
+        });
+
+                // Add a bit of parallax effect for the magnet
+                window.addEventListener('scroll', function () {
+                    const magnet = document.querySelector('.magnet');
+                    http://magnet.style.transform = `translateY(${scrollPos * 0.2}px)`; // Move magnet slower than the brake system
+        });
+            });
+        </script>
+
+    </body>
+
+</html

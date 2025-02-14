@@ -1,226 +1,230 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Log-In Page</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0; /* Corrected from 'position: 0;' which isn't a valid CSS property */
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background: rgb(56, 55, 55);
+        background-image: url("./image/lady.jpg");
+        background-size: cover;
+        background-position: center;
+        perspective: 1000px;
+      }
+
+      .login-container {
+        position: relative;
+        width: 320px;
+        background: rgb(77, 76, 76);
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0 0 30px rgba(16, 16, 16, 0.646);
+        overflow: hidden;
+        /* 3D effect for container */
+        transform-style: preserve-3d;
+        transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+        transition: transform 0.3s ease;
+      }
+
+      .login-container::before,
+      .login-container::after {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 380px;
+        height: 420px;
+        /* Changed to a more 3D looking gradient */
+        background: linear-gradient(
+          45deg,
+          transparent,
+          rgb(8, 136, 162),
+          #45f3ff
+        );
+        transform-origin: bottom right;
+        animation: animate 6s linear infinite;
+        /* 3D effect */
+        transform: perspective(600px) rotateX(45deg) rotateZ(45deg);
+      }
+
+      .login-container::after {
+        animation-delay: -3s;
+        transform: perspective(600px) rotateX(-45deg) rotateZ(-45deg);
+      }
+
+      @keyframes animate {
+        0% {
+          transform: rotate(0deg);
         }
 
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background: rgb(56, 55, 55);
-            background-image: url('./image/lady.jpg');
-            background-size: cover;
-            background-position: center;
-            /* Adding perspective for 3D effects */
-            perspective: 1000px;
+        100% {
+          transform: rotate(360deg);
         }
+      }
 
-        .login-container {
-            position: relative;
-            width: 320px;
-            background: rgb(77, 76, 76);
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 0 30px rgba(16, 16, 16, 0.646);
-            overflow: hidden;
-            /* 3D effect for container */
-            transform-style: preserve-3d;
-            transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
-            transition: transform 0.3s ease;
-        }
+      .form-box {
+        position: relative;
+        z-index: 10;
+        background: #28292d;
+        padding: 40px;
+        border-radius: 4px;
+        /* 3D effect for form */
+        transform-style: preserve-3d;
+        transform: translateZ(20px);
+      }
 
-        .login-container::before,
-        .login-container::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 380px;
-            height: 420px;
-            /* Changed to a more 3D looking gradient */
-            background: linear-gradient(45deg, transparent, rgb(8, 136, 162), #45f3ff);
-            transform-origin: bottom right;
-            animation: animate 6s linear infinite;
-            /* 3D effect */
-            transform: perspective(600px) rotateX(45deg) rotateZ(45deg);
-        }
+      h2 {
+        color: rgb(29, 165, 192);
+        text-align: center;
+        margin-bottom: 30px;
+        font-size: 2em;
+        /* 3D text effect */
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+      }
 
-        .login-container::after {
-            animation-delay: -3s;
-            transform: perspective(600px) rotateX(-45deg) rotateZ(-45deg);
-        }
+      .input-box {
+        position: relative;
+        margin-bottom: 30px;
+      }
 
-        @keyframes animate {
-            0% {
-                transform: rotate(0deg);
-            }
+      .input-box input {
+        width: 100%;
+        padding: 10px;
+        background: transparent;
+        border: none;
+        border-bottom: 2px solid rgb(29, 165, 192);
+        color: #fff;
+        font-size: 1em;
+        outline: none;
+        transition: 0.5s;
+        /* 3D effect on focus */
+        box-shadow: 0 0 5px #45f3ff;
+      }
 
-            100% {
-                transform: rotate(360deg);
-            }
-        }
+      .input-box label {
+        position: absolute;
+        left: 0;
+        padding: 10px 0;
+        pointer-events: none;
+        color: rgba(255, 255, 255, 0.5);
+        transition: 0.5s;
+      }
 
-        .form-box {
-            position: relative;
-            z-index: 10;
-            background: #28292d;
-            padding: 40px;
-            border-radius: 4px;
-            /* 3D effect for form */
-            transform-style: preserve-3d;
-            transform: translateZ(20px);
-        }
+      .input-box input:valid ~ label,
+      .input-box input:focus ~ label {
+        transform: translateY(-20px);
+        font-size: 0.8em;
+        color: #45f3ff;
+      }
 
-        h2 {
-            color: rgb(29, 165, 192);
-            text-align: center;
-            margin-bottom: 30px;
-            font-size: 2em;
-            /* 3D text effect */
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
-        }
+      button {
+        width: 100%;
+        padding: 10px 20px;
+        background: rgb(29, 165, 192);
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 1em;
+        color: #1f1f1f;
+        font-weight: 600;
+        transition: 0.5s;
+        /* 3D button effect */
+        transform-style: preserve-3d;
+        transform: perspective(500px) translateZ(10px);
+      }
 
-        .input-box {
-            position: relative;
-            margin-bottom: 30px;
-        }
+      button:hover {
+        background: rgb(1, 255, 255);
+        letter-spacing: 0.1em;
+        transform: scale(1.05) translateZ(15px);
+      }
 
-        .input-box input {
-            width: 100%;
-            padding: 10px;
-            background: transparent;
-            border: none;
-            border-bottom: 2px solid rgb(29, 165, 192);
-            color: #fff;
-            font-size: 1em;
-            outline: none;
-            transition: 0.5s;
-            /* 3D effect on focus */
-            box-shadow: 0 0 5px #45f3ff;
-        }
-
-        .input-box label {
-            position: absolute;
-            left: 0;
-            padding: 10px 0;
-            pointer-events: none;
-            color: rgba(255, 255, 255, 0.5);
-            transition: 0.5s;
-        }
-
-        .input-box input:valid ~ label,
-        .input-box input:focus ~ label {
-            transform: translateY(-20px);
-            font-size: 0.8em;
-            color: #45f3ff;
-        }
-
-        button {
-            width: 100%;
-            padding: 10px 20px;
-            background: rgb(29, 165, 192);
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 1em;
-            color: #1f1f1f;
-            font-weight: 600;
-            transition: 0.5s;
-            /* 3D button effect */
-            transform-style: preserve-3d;
-            transform: perspective(500px) translateZ(10px);
-        }
-
-        button:hover {
-            background: rgb(1, 255, 255);
-            letter-spacing: 0.1em;
-            transform: scale(1.05) translateZ(15px);
-        }
-
-        audio {
-            width: 100%;
-            padding: 10px 20px;
-            background: linear-gradient(rgb(75, 74, 74), rgb(98, 156, 171));
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 1em;
-            color: rgb(11, 125, 125);
-            font-weight: 600;
-            transition: 0.5s;
-            overflow: hidden;
-            box-shadow: 0 0 30px rgba(16, 16, 16, 0.646);
-            /* 3D effect for audio */
-            transform-style: preserve-3d;
-            transform: perspective(500px) rotateX(5deg) rotateY(-5deg);
-        }
+      audio {
+        width: 100%;
+        padding: 10px 20px;
+        background: linear-gradient(rgb(75, 74, 74), rgb(98, 156, 171));
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 1em;
+        color: rgb(11, 125, 125);
+        font-weight: 600;
+        transition: 0.5s;
+        overflow: hidden;
+        box-shadow: 0 0 30px rgba(16, 16, 16, 0.646);
+        /* 3D effect for audio */
+        transform-style: preserve-3d;
+        transform: perspective(500px) rotateX(5deg) rotateY(-5deg);
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <div>
-        <div id="login-container" class="login-container">
-            <div class="form-box">
-                <h2>Login</h2>
-                <div class="input-box">
-                    <input type="text" required id="username">
-                    <label for="username">Username</label>
-                </div>
-                <div class="input-box">
-                    <input type="password" required id="password">
-                    <label for="password">Password</label>
-                </div>
-                <button type="submit" id="login-btn">Login</button>
-            </div>
-            <audio controls draggable="true" id="audio-element">
-                <source src="./Audio/Asake.mp3" type="audio/mpeg">
-            </audio>
+      <div id="login-container" class="login-container">
+        <div class="form-box">
+          <h2>Login</h2>
+          <div class="input-box">
+            <input type="text" required id="username" />
+            <label for="username">Username</label>
+          </div>
+          <div class="input-box">
+            <input type="password" required id="password" />
+            <label for="password">Password</label>
+          </div>
+          <button type="submit" id="login-btn">Login</button>
         </div>
+        <audio controls draggable="true" id="audio-element">
+          <source src="./Audio/Asake.mp3" type="audio/mpeg" />
+        </audio>
+      </div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.0/gsap.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.0/gsap.min.js"> --><!-- </script> -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const loginContainer = document.getElementById('login-container');
-            const audioElement = document.getElementById('audio-element');
-            const loginBtn = document.getElementById('login-btn');
+      document.addEventListener("DOMContentLoaded", function () {
+        const loginContainer = document.getElementById("login-container");
+        const audioElement = document.getElementById("audio-element");
+        const loginBtn = document.getElementById("login-btn");
 
-           
-            loginContainer.addEventListener('mousemove', (e) => {
-                const x = (window.innerWidth / 2 - e.pageX) / 20;
-                const y = (window.innerHeight / 2 - e.pageY) / 20;
-                loginContainer.style.transform = `rotateX(${y}deg) rotateY(${x}deg)`;
-            });
-
-           
-            loginContainer.addEventListener('mouseleave', () => {
-                loginContainer.style.transform = 'rotateX(0deg) rotateY(0deg)';
-            });
-
-          
-            loginBtn.addEventListener('click', function(event) {
-                event.preventDefault(); 
-                gsap.fromTo(loginBtn, { scale: 1 }, { scale: 1.1, duration: 0.3, yoyo: true, repeat: 1 });
-            });
-
-         
-            audioElement.addEventListener('play', function() {
-                gsap.to(audioElement, { duration: 0.5, scale: 1.05 });
-            });
-            audioElement.addEventListener('pause', function() {
-                gsap.to(audioElement, { duration: 0.5, scale: 1 });
-            });
+        loginContainer.addEventListener("mousemove", (e) => {
+          const x = (window.innerWidth / 2 - e.pageX) / 20;
+          const y = (window.innerHeight / 2 - e.pageY) / 20;
+          loginContainer.style.transform = `rotateX(${y}deg) rotateY(${x}deg)`;
         });
+
+        loginContainer.addEventListener("mouseleave", () => {
+          loginContainer.style.transform = "rotateX(0deg) rotateY(0deg)";
+        });
+
+        loginBtn.addEventListener("click", function (event) {
+          event.preventDefault();
+          gsap.fromTo(
+            loginBtn,
+            { scale: 1 },
+            { scale: 1.1, duration: 0.3, yoyo: true, repeat: 1 }
+          );
+        });
+
+        audioElement.addEventListener("play", function () {
+          gsap.to(audioElement, { duration: 0.5, scale: 1.05 });
+        });
+        audioElement.addEventListener("pause", function () {
+          gsap.to(audioElement, { duration: 0.5, scale: 1 });
+        });
+      });
     </script>
-</body>
+  </body>
 </html>
