@@ -21,30 +21,29 @@
         }
 
         .container {
-            width: 60%;
-            max-width: 400px;
             background: white;
-            padding: 20px;
-            border-radius: 10px;
+            width: 80%;
+            max-width: 300px;
+            padding: 10px;
+            border-radius: 5px;
             text-align: center;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 90vh;
+            
         }
 
-        .header {
-            background: black;
-            color: white;
-            padding: 10px;
-            font-size: 18px;
-            text-align: center;
-            border-radius: 5px;
-            margin-bottom: 15px;
-        }
 
         .content img {
             width: 100%;
+            height: 100%;
             max-width: 200px;
             margin: auto;
             display: block;
+            margin-top: 50px;
         }
 
         .content h2 {
@@ -54,7 +53,7 @@
         }
 
         .content p {
-            color: gray;
+            color: black;
             font-size: 14px;
             margin: 10px 0;
         }
@@ -63,18 +62,24 @@
             display: flex;
             justify-content: center;
             margin-bottom: 15px;
+            position: absolute;
+            bottom: 10px;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, 50%);
+            font-size: 24px;
         }
 
         .dot {
             width: 8px;
             height: 8px;
-            background: lightgray;
-            margin: 0 4px;
-            border-radius: 50%;
+            background: rgb(100, 93, 232);
+           border-radius: 50%; 
+           margin: 0 4px;           
         }
 
         .dot.active {
-            background: rgb(130, 130, 233);
+            background: rgb(8, 8, 88);
         }
 
         .btn {
@@ -84,10 +89,18 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            width: 100%;
+            width: 50%;
             font-size: 16px;
+             margin-top: 200px;
             display: flex;
-            transition: background-color 0.4s ease, transform 0.3s ease;
+            transition: background 0.3s, transform 0.2s;
+            text-align: center;
+            justify-content: center;
+        }
+
+        .btn:hover {
+            background: rgb(102, 102, 143);
+            transform: scale(0.8);
         }
 
         .skip {
@@ -96,13 +109,15 @@
             color: black;
             cursor: pointer;
             margin-bottom: 10px;
+            position: absolute;
+            top: 10px;
+            right: 16px;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <div class="header">SCA MOBILE APP</div>
         
         <div class="skip">Skip</div>
         
