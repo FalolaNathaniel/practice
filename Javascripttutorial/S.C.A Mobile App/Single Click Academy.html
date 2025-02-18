@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Single Click Academy</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: arial, sans-serif;
+
+            }
+
+            body {
+                background-color: #A7D0F5;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                margin: 0;
+            }
+
+            .container {
+                display: flex;
+                width: 300px;
+                height: 550px;
+                background-color: white;
+                border-radius: 5px;
+                padding: 5px;
+                text-align: center;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                display: flex;
+                flex-direction: column;
+              justify-content: center; 
+               align-items: center;
+               
+            }
+
+            .content {
+                margin-top: 40px;
+            }
+
+            .icon {
+                text-align: right;
+            }
+
+            .code-btn {
+
+                background-color: green;
+                color: white;
+                border: none;
+                border-radius: 50%;
+                padding: 8px;
+                font-size: 16px;
+                cursor: pointer;
+                
+            }
+
+            .image img {
+                width: 90%;
+                margin-top: 60px;
+            
+            }
+
+            h1 {
+                font-size: 18px;
+                margin-top: 15px;
+                font-weight: bold;
+            }
+
+            p {
+                font-size: 14px;
+                color: gray;
+                margin: 5px 0;
+            }
+
+            .dots {
+                display: flex;
+                justify-content: center;
+                margin: 15px 0;
+                margin-top: 40px;
+            }
+
+
+            .dot {
+                width: 10px;
+                height: 10px;
+                background-color: lightblue;
+                border-radius: 50%;
+                margin: 0 5px;
+                display: inline-block;
+                transition: background-color 0.3s;
+                margin-top: 10px;
+                margin-bottom: 70px;
+            }
+
+
+            .dot.active {
+                background-color: navy;
+                width: 15px;
+                border-radius: 5px;
+
+            }
+
+            .next-btn {
+                background-color: navy;
+                display: flex;
+                color : white;
+                border: none;
+                font-size: 16px;
+                border-radius: 5px;
+                cursor: pointer;
+                width: 50%;
+                padding: 10px 10px;
+                text-align: center;
+                margin-top: 10px;
+                margin-left: 75px;
+                justify-content: center;
+                transition: background-color 0.4s ease, transform 0.3s ease;
+            
+            }
+
+            .next-btn:hover {
+            background: rgb(125, 125, 165);
+            transform: scale(0.8);
+        }
+        </style>
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="card">
+                <div class="icon">
+                    <button class="code-btn">&#128187</button>
+                </div>
+
+                <div class="image">
+                    <img srcset="/image/website.jpg" alt="classroom-illustration">
+                </div>
+
+                <h1>Welcome to Single Click Academy!</h1>
+                <p>Your gateway to mastering tech skills.</p>
+                <div class="dots">
+                    <span class="dot active"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+                <botton class="next-btn" onclick="nextSlide()">Next</botton>
+            </div>
+        </div>
+
+        <script>
+            let currentIndex = 0;
+
+            function nextSlide() {
+
+                const dot = document.querySelectorAll('.dot');
+                dots[currentIndex].classList.remove('active');
+                currentIndex = (currentIndex + 1) % dots.lenght;
+                dots[currentIndex].classList.add('active');
+
+            }
+        </script>
+    </body>
+
+</html>

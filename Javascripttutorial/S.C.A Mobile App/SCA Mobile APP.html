@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SCA Mobile App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+    body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #b0d4f1;
+}
+
+/* Header */
+.header {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    font-size: 18px;
+    transform: scaleY(1.5);
+    display: inline-block;
+
+}
+
+.container {
+    height: auto;
+    scroll-behavior: none;
+    
+}
+
+
+/* Mobile Screen */
+.screen {
+    width: 300px;
+    height: 550px;
+    background-color: white;
+    border-radius: 10px;
+    margin: 50px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+/* Logo */
+.logo-container {
+    text-align: center;
+    margin-top: 120px;
+
+
+}
+  .h2{
+    font-size: 20px;
+    transform: scaleY(2.0);  
+    letter-spacing: 1px; 
+}
+
+
+
+.h4{
+    color: lightskyblue;
+    letter-spacing: 6px;
+    margin-top: -10px;
+    font-weight:5px;
+}
+
+.logo {
+    width: 100px;
+}
+
+/* Clouds */
+.cloud {
+    width: 80px;
+    height: 50px;
+    background-color: navy;
+    border-radius: 50%;
+    position: absolute;
+}
+
+.cloud::before, .cloud::after {
+    content: "";
+    width: 60px;
+    height: 50px;
+    background-color: navy;
+    border-radius: 50%;
+    position: absolute;
+}
+
+.cloud::before {
+    left: -30px;
+}
+
+.cloud::after {
+    right: -30px;
+}
+
+.top {
+    top: 20px;
+    left: 20px;
+    background-color: #1b82c2;
+}
+
+.bottom {
+    bottom: 20px;
+    right: 20px;
+    background-color: navy;
+}
+
+</style>
+
+<body>
+    <div class="container">
+        <header class="header">
+            SCA MOBILE APP
+        </header>
+        <div class="screen">
+            <div class="cloud top"></div>
+            <div class="logo-container">
+                <img src="/image/Lagos city.jpg" alt="Single Click Academy Logo" class="logo">
+                <h2 class="h2">Single Click</h2>
+                <h4 class="h4">ACADEMY</h4>
+            </div>
+            <div class="cloud bottom"></div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+    const clouds = document.querySelectorAll(".cloud");
+    clouds.forEach(cloud => {
+        cloud.style.transition = "transform 1s ease-in-out";
+        cloud.style.transform = "scale(1.1)";
+        setTimeout(() => {
+            cloud.style.transform = "scale(1)";
+        }, 1000);
+    });
+});
+    </script>
+</body>
+</html>
