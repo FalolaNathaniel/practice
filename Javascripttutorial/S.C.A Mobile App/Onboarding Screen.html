@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Onboarding Screen</title>
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Sans-serif;
+        }
+
+
+        body {
+            background-color: #A8D1FF;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: white;
+            width: 90%;
+            max-width: 350px;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 90vh;
+            
+        }
+
+
+        .skip {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 14px;
+            cursor: pointer;
+            color: black;
+        }
+
+        .image-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin: 20px 0px;
+        }
+
+        .image-container img {
+            width: 60%;
+        }
+
+        h2 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+
+        p {
+            font-size: 14px;
+            color: grey;
+        }
+
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            background: lightblue;
+            border-radius: 50%;
+        }
+
+
+        .dots {
+            margin: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            margin-bottom: 15px;
+        }
+
+        .dot.active {
+            background: navy;
+        }
+
+        .next-btn {
+            width: 50%;
+            padding: 10px;
+            background: navy;
+            color: white;
+            text-align: center;
+            border-radius: 5px;
+            text-decoration:hsl(from color h s l);
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.4s ease, transform 0.3s ease;
+            
+        }
+
+        .next-btn:hover{
+            background: rgb(125, 125, 165);
+            transform: scale(0.8);
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="skip" onclick="skipOnboarding()">SKIP</div>
+        
+        <div class="image-container">
+            <img src="/image/Consultant.jpg" alt="Learning Illustration">
+        </div>
+
+        <h2> Learn at your own <br>pace!</h2>
+        <p>Access courses anytime, anywhere, online<br>or offline.</p>
+
+        <div class="dots">
+            <span class="dot active"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+        </div>
+
+        <div class="next-btn" onclick="nextSlide()">NEXT</div>
+    </div>
+
+    <script>
+        let currentSLide = 0;
+        const dots = document.querySelectorAll(".dot");
+
+        function nextSlide() {
+            if (currentSlide < dots.length - 1) {
+                dots[currentSlide].classList.remove("active");
+                currentSlide++;
+                dots[currentSLide].classList.add("active");
+            } else {
+                alert("Onboarding Completed");
+            }
+        }
+
+        functionnskipOnboarding(){
+            alert("Skipping Onboarding");
+        }
+    </script>
+</body>
+</html>
